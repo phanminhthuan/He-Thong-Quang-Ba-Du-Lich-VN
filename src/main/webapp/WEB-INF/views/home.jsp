@@ -1,656 +1,574 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>spring-mvc-showcase</title>
-	<link href="<c:url value="/resources/form.css" />" rel="stylesheet"  type="text/css" />		
-	<link href="<c:url value="/resources/jqueryui/1.8/themes/base/jquery.ui.core.css" />" rel="stylesheet" type="text/css"/>
-	<link href="<c:url value="/resources/jqueryui/1.8/themes/base/jquery.ui.theme.css" />" rel="stylesheet" type="text/css"/>
-	<link href="<c:url value="/resources/jqueryui/1.8/themes/base/jquery.ui.tabs.css" />" rel="stylesheet" type="text/css"/>
-	
-	<!--
-		Used for including CSRF token in JSON requests
-		Also see bottom of this file for adding CSRF token to JQuery AJAX requests
-	-->
-	<meta name="_csrf" content="${_csrf.token}"/>
-	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Việt Nam</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="resources/style.css">
+
 </head>
 <body>
-<h1><a href="<c:url value="/" />">spring-mvc-showcase</a></h1>
-<p>Recommended: Using a Web Developer tool such a Firebug to inspect the client/server interaction</p>
-<div id="tabs">
-	<ul>
-		<li><a href="#simple">Simple</a></li>
-		<li><a href="#mapping">Request Mapping</a></li>
-		<li><a href="#data">Request Data</a></li>
-		<li><a href="#responses">Response Writing</a></li>
-		<li><a href="#messageconverters">Message Converters</a></li>
-		<li><a href="#views">View Rendering</a></li>
-		<li><a href="#convert">Type Conversion</a></li>
-		<li><a href="#validation">Validation</a></li>
-		<li><a href="<c:url value="/form" />" title="forms">Forms</a></li>
-		<li><a href="<c:url value="/fileupload" />" title="fileupload">File Upload</a></li>
-		<li><a href="#exceptions">Exception Handling</a></li>
-		<li><a href="#redirect">Redirecting</a></li>
-        <li><a href="#async">Async Requests</a></li>
-    </ul>
-    <div id="simple">
-		<h2>Simple</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.simple</code> package for the @Controller code
-		</p>
-		<ul>
-			<li>
-				<a id="simpleLink" class="textLink" href="<c:url value="/simple" />">GET /simple</a>
-			</li>
-			<li>
-				<a id="simpleRevisited" class="textLink" href="<c:url value="/simple/revisited" />">GET /simple/revisited</a>
-			</li>
-		</ul>
-	</div>
-	<div id="mapping">
-		<h2>Request Mapping</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.mapping</code> package for the @Controller code
-		</p>
-		<ul>
-			<li>
-				<a id="byPath" class="textLink" href="<c:url value="/mapping/path" />">By path</a>
-			</li>
-			<li>
-				<a id="byPathPattern" class="textLink" href="<c:url value="/mapping/path/wildcard" />">By path pattern</a>
-			</li>
-			<li>
-				<a id="byMethod" class="textLink" href="<c:url value="/mapping/method" />">By path and method</a>
-			</li>
-			<li>
-				<a id="byParameter" class="textLink" href="<c:url value="/mapping/parameter?foo=bar" />">By path, method, and presence of parameter</a>
-			</li>
-			<li>
-				<a id="byNotParameter" class="textLink" href="<c:url value="/mapping/parameter" />">By path, method, and not presence of parameter</a>
-			</li>
-			<li>
-				<a id="byHeader" href="<c:url value="/mapping/header" />">By presence of header</a>
-			</li>
-			<li>
-				<a id="byHeaderNegation" class="textLink" href="<c:url value="/mapping/header" />">By absence of header</a>
-			</li>
-			<li>
-				<form id="byConsumes" class="readJsonForm" action="<c:url value="/mapping/consumes" />" method="post">
-					<input id="byConsumesSubmit" type="submit" value="By consumes" />
-				</form>
-			</li>
-			<li>
-				<a id="byProducesAcceptJson" class="writeJsonLink" href="<c:url value="/mapping/produces" />">By produces via Accept=application/json</a>
-			</li>
-            <li>
-                <a id="byProducesAcceptXml" class="writeXmlLink" href="<c:url value="/mapping/produces" />">By produces via Accept=application/xml</a>
-            </li>
-            <li>
-              <a id="byProducesJsonExt" class="writeJsonLink" href="<c:url value="/mapping/produces.json" />">By produces via ".json"</a>
-            </li>
-            <li>
-                <a id="byProducesXmlExt" class="writeXmlLink" href="<c:url value="/mapping/produces.xml" />">By produces via ".xml"</a>
-            </li>
-		</ul>
-	</div>
-	<div id="data">
-		<h2>Request Data</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.data</code> package for the @Controller code
-		</p>
-		<ul>
-			<li>
-				<a id="param" class="textLink" href="<c:url value="/data/param?foo=bar" />">Query parameter</a>
-			</li>
-			<li>
-				<a id="group" class="textLink" href="<c:url value="/data/group?param1=foo&param2=bar&param3=baz" />">Group of query parameters</a>
-			</li>
-			<li>
-				<a id="var" class="textLink" href="<c:url value="/data/path/foo" />">Path variable</a>
-			</li>
-			<li>
-				<a id="matrixVar" class="textLink" href="<c:url value="/data/matrixvars;foo=bar/simple" />">Matrix variable</a>
-			</li>
-			<li>
-				<a id="matrixVarMultiple" class="textLink" href="<c:url value="/data/matrixvars;foo=bar1/multiple;foo=bar2" />">Matrix variables (multiple)</a>
-			</li>
-			<li>
-				<a id="header" class="textLink" href="<c:url value="/data/header" />">Header</a>
-			</li>
-			<li>
-				<form id="requestBody" class="textForm" action="<c:url value="/data/body" />" method="post">
-					<input id="requestBodySubmit" type="submit" value="Request Body" />
-				</form>
-			</li>				
-			<li>
-				<form id="requestBodyAndHeaders" class="textForm" action="<c:url value="/data/entity" />" method="post">
-					<input id="requestBodyAndHeadersSubmit" type="submit" value="Request Body and Headers" />
-				</form>
-			</li>
-		</ul>	
-		<div id="standardArgs">
-			<h3>Standard Resolvable Web Arguments</h3>
-			<p>
-			    See the <code>org.springframework.samples.mvc.data.standard</code> package for the @Controller code
-			</p>
-			<ul>
-				<li>
-					<a id="request" class="textLink" href="<c:url value="/data/standard/request" />">Request arguments</a>				
-				</li>
-				<li>
-					<form id="requestReader" class="textForm" action="<c:url value="/data/standard/request/reader" />" method="post">
-						<input id="requestReaderSubmit" type="submit" value="Request Reader" />
-					</form>
-				</li>			
-				<li>
-					<form id="requestIs" class="textForm" action="<c:url value="/data/standard/request/is" />" method="post">
-						<input id="requestIsSubmit" type="submit" value="Request InputStream" />
-					</form>
-				</li>
-				<li>
-					<a id="response" class="textLink" href="<c:url value="/data/standard/response" />">Response arguments</a>				
-				</li>			
-				<li>
-					<a id="writer" class="textLink" href="<c:url value="/data/standard/response/writer" />">Response Writer</a>
-				</li>
-				<li>
-					<a id="os" class="textLink" href="<c:url value="/data/standard/response/os" />">Response OutputStream</a>				
-				</li>
-				<li>
-					<a id="session" class="textLink" href="<c:url value="/data/standard/session" />">Session</a>			
-				</li>			
-			</ul>
-		</div>
-		<div id="customArgs">
-			<h3>Custom Resolvable Web Arguments</h3>	
-			<p>
-				See the <code>org.springframework.samples.mvc.data.custom</code> package for the @Controller code
-			</p>
-			<ul>
-				<li>
-					<a id="customArg" class="textLink" href="<c:url value="/data/custom" />">Custom</a>			
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div id="responses">
-		<h2>Response Writing</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.response</code> package for the @Controller code
-		</p>		
-		<ul>
-			<li>
-				<a id="responseBody" class="textLink" href="<c:url value="/response/annotation" />">@ResponseBody</a>			
-			</li>
-			<li>
-				<a id="responseCharsetAccept" class="utf8TextLink" href="<c:url value="/response/charset/accept" />">@ResponseBody (UTF-8 charset requested)</a>
-			</li>
-			<li>
-				<a id="responseCharsetProduce" class="textLink" href="<c:url value="/response/charset/produce" />">@ResponseBody (UTF-8 charset produced)</a>
-			</li>
-			<li>
-				<a id="responseEntityStatus" class="textLink" href="<c:url value="/response/entity/status" />">ResponseEntity (custom status)</a>			
-			</li>
-			<li>
-				<a id="responseEntityHeaders" class="textLink" href="<c:url value="/response/entity/headers" />">ResponseEntity (custom headers)</a>			
-			</li>
-		</ul>	
-	</div>
-	<div id="messageconverters">
-		<h2>Http Message Converters</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.messageconverters</code> package for the @Controller code
-		</p>	
-		<div id="stringMessageConverter">
-			<h3>StringHttpMessageConverter</h3>
-			<ul>
-				<li>
-					<form id="readString" class="textForm" action="<c:url value="/messageconverters/string" />" method="post">
-						<input id="readStringSubmit" type="submit" value="Read a String" />
-					</form>
-				</li>
-				<li>
-					<a id="writeString" class="textLink" href="<c:url value="/messageconverters/string" />">Write a String</a>
-				</li>
-			</ul>
-			<h3>FormHttpMessageConverter</h3>
-			<ul>
-				<li>
-					<form id="readForm" action="<c:url value="/messageconverters/form" />" method="post">
-						<input id="readFormSubmit" type="submit" value="Read Form Data" />		
-					</form>
-				</li>
-				<li>
-					<a id="writeForm" href="<c:url value="/messageconverters/form" />">Write Form Data</a>
-				</li>
-			</ul>
-			<h3>Jaxb2RootElementHttpMessageConverter</h3>
-			<ul>
-				<li>
-					<form id="readXml" class="readXmlForm" action="<c:url value="/messageconverters/xml" />" method="post">
-						<input id="readXmlSubmit" type="submit" value="Read XML" />		
-					</form>
-				</li>
-				<li>
-					<a id="writeXmlAccept" class="writeXmlLink" href="<c:url value="/messageconverters/xml" />">Write XML via Accept=application/xml</a>
-				</li>
-                <li>
-                    <a id="writeXmlExt" class="writeXmlLink" href="<c:url value="/messageconverters/xml.xml" />">Write XML via ".xml"</a>
-                </li>
-			</ul>
-			<h3>MappingJacksonHttpMessageConverter</h3>
-			<ul>
-				<li>
-					<form id="readJson" class="readJsonForm" action="<c:url value="/messageconverters/json" />" method="post">
-						<input id="readJsonSubmit" type="submit" value="Read JSON" />	
-					</form>
-				</li>
-				<li>
-					<form id="readJsonInvalid" class="readJsonForm invalid" action="<c:url value="/messageconverters/json" />" method="post">
-						<input id="readInvalidJsonSubmit" type="submit" value="Read invalid JSON (400 response code)" />	
-					</form>
-				</li>
-				<li>
-					<a id="writeJsonAccept" class="writeJsonLink" href="<c:url value="/messageconverters/json" />">Write JSON via Accept=application/json</a>
-				</li>
-                <li>
-                    <a id="writeJsonExt" class="writeJsonLink" href="<c:url value="/messageconverters/json.json" />">Write JSON via ".json"</a>
-                </li>
-			</ul>
-			<h3>AtomFeedHttpMessageConverter</h3>
-			<ul>
-				<li>
-					<form id="readAtom" action="<c:url value="/messageconverters/atom" />" method="post">
-						<input id="readAtomSubmit" type="submit" value="Read Atom" />		
-					</form>
-				</li>
-				<li>
-					<a id="writeAtom" href="<c:url value="/messageconverters/atom" />">Write Atom</a>
-				</li>
-			</ul>
-			<h3>RssChannelHttpMessageConverter</h3>
-			<ul>
-				<li>
-					<form id="readRss" action="<c:url value="/messageconverters/rss" />" method="post">
-						<input id="readRssSubmit" type="submit" value="Read Rss" />	
-					</form>
-				</li>
-				<li>
-					<a id="writeRss" href="<c:url value="/messageconverters/rss" />">Write Rss</a>
-				</li>
-			</ul>		
-		</div>
-	</div>
-	<div id="views">
-		<h2>View Rendering</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.views</code> package for the @Controller code
-		</p>
-		<ul>
-			<li>
-				<a href="<c:url value="/views/html" />">HTML generated by JSP template</a>
-			</li>
-		</ul>	
-		<ul>
-			<li>
-				<a href="<c:url value="/views/viewName" />">DefaultRequestToViewNameTranslator convention</a>
-			</li>
-		</ul>	
-		<ul>
-			<li>
-				<a href="<c:url value="/views/pathVariables/bar/apple" />">Using path variables in a view template</a>
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<a href="<c:url value="/views/dataBinding/bar/apple" />">Data binding with URI variables</a>
-			</li>
-		</ul>
-	</div>
-	<div id="convert">
-		<h2>Type Conversion</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.convert</code> package for the @Controller code
-		</p>
-		<ul>
-			<li>
-				<a id="primitive" class="textLink" href="<c:url value="/convert/primitive?value=3" />">Primitive</a>
-			</li>
-			<li>
-				<a id="date" class="textLink" href="<c:url value="/convert/date/2010-07-04" />">Date</a>
-			</li>
-			<li>
-				<a id="collection" class="textLink" href="<c:url value="/convert/collection?values=1&values=2&values=3&values=4&values=5" />">Collection 1 (multi-value parameter)</a>
-			</li>
-			<li>
-				<a id="collection2" class="textLink" href="<c:url value="/convert/collection?values=1,2,3,4,5" />">Collection 2 (single comma-delimited parameter value)</a>
-			</li>
-			<li>
-				<a id="formattedCollection" class="textLink" href="<c:url value="/convert/formattedCollection?values=2010-07-04,2011-07-04" />">@Formatted Collection</a>
-			</li>		
-			<li>
-				<a id="valueObject" class="textLink" href="<c:url value="/convert/value?value=123456789" />">Custom Value Object</a>
-			</li>
-			<li>
-				<a id="customConverter" class="textLink" href="<c:url value="/convert/custom?value=123-45-6789" />">Custom Converter</a>
-			</li>		
-		</ul>
-		<div id="convert-bean">
-			<h3>JavaBean Property Binding</h3>
-			<ul>
-				<li>
-					<a id="primitiveProp" class="textLink" href="<c:url value="/convert/bean?primitive=3" />">Primitive</a>
-				</li>	
-				<li>
-					<a id="dateProp" class="textLink" href="<c:url value="/convert/bean?date=2010-07-04" />">Date</a>
-				</li>	
-				<li>
-					<a id="maskedProp" class="textLink" href="<c:url value="/convert/bean?masked=(205) 333-3333" />">Masked</a>
-				</li>	
-				<li>
-					<a id="listProp" class="textLink" href="<c:url value="/convert/bean?list[0]=1&list[1]=2&list[2]=3" />">List Elements</a>
-				</li>
-				<li>
-					<a id="formattedListProp" class="textLink" href="<c:url value="/convert/bean?formattedList[0]=2010-07-04&formattedList[1]=2011-07-04" />">@Formatted List Elements</a>
-				</li>
-				<li>
-					<a id="mapProp" class="textLink" href="<c:url value="/convert/bean?map[0]=apple&map[1]=pear" />">Map Elements</a>
-				</li>
-				<li>
-					<a id="nestedProp" class="textLink" href="<c:url value="/convert/bean?nested.foo=bar&nested.list[0].foo=baz&nested.map[key].list[0].foo=bip" />">Nested</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div id="validation">
-		<h2>Validation</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.validation</code> package for the @Controller code	
-		</p>
-		<ul>
-			<li>
-				<a id="validateNoErrors" class="textLink" href="<c:url value="/validate?number=3&date=2029-07-04" />">Validate, no errors</a>
-			</li>
-			<li>
-				<a id="validateErrors" class="textLink" href="<c:url value="/validate?number=3&date=2010-07-01" />">Validate, errors</a>
-			</li>
-		</ul>	
-	</div>
-	<div id="exceptions">
-		<h2>Exception Handling</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.exceptions</code> package for the @Controller code	
-		</p>
-		<ul>
-			<li>
-				<a id="exception" class="textLink" href="<c:url value="/exception" />">@ExceptionHandler in Controller</a>
-			</li>
-			<li>
-				<a id="globalException" class="textLink" href="<c:url value="/global-exception" />">Global @ExceptionHandler</a>
-			</li>
-		</ul>
-	</div>
-	<div id="redirect">
-		<h2>Redirecting</h2>
-		<p>
-			See the <code>org.springframework.samples.mvc.redirect</code> package for the @Controller code	
-		</p>
-		<ul>
-			<li>
-				<a href="<c:url value="/redirect/uriTemplate" />">URI Template String</a>
-			</li>
-			<li>
-				<a href="<c:url value="/redirect/uriComponentsBuilder" />">UriComponentsBuilder</a>
-			</li>
-		</ul>
-	</div>
-	<div id="async">
-		<h2>Async Requests</h2>
-		<p>
-			<em>Note: Links may take 2-3 seconds to complete.</em>
-		</p>
-		<p>
-		  See the <code>org.springframework.samples.mvc.async</code> package for the @Controller code.
-		</p>
-		<ul>
-		<li>
-			<a id="callableResponseBodyLink" class="textLink"
-				href="<c:url value="/async/callable/response-body" />">GET /async/callable/response-body</a>
-		</li>
-		<li>
-			<a id="callableViewLink" class="textLink"
-				href="<c:url value="/async/callable/view" />">GET /async/callable/view</a>
-		</li>
-		<li>
-			<a id="callableExceptionLink" class="textLink"
-				href="<c:url value="/async/callable/exception" />">GET /async/callable/exception</a>
-		</li>
-		<li>
-			<a id="callableUnhandledExceptionLink" class="textLink"
-				href="<c:url value="/async/callable/exception?handled=false" />">GET /async/callable/exception?handled=false</a>
-				(500 Error expected)
-		</li>
-		<li>
-			<a id="callableCustomTimeoutLink" class="textLink"
-				href="<c:url value="/async/callable/custom-timeout-handling" />">GET /async/callable/custom-timeout-handling</a>
-		</li>
-		<li>
-			<a id="deferredResultSuccessLink" class="textLink"
-				href="<c:url value="/async/deferred-result/response-body" />">GET /async/deferred-result/response-body</a>
-		</li>
-		<li>
-			<a id="deferredResultModelAndViewLink" class="textLink"
-				href="<c:url value="/async/deferred-result/model-and-view" />">GET /async/deferred-result/model-and-view</a>
-		</li>
-		<li>
-			<a id="deferredResultErrorLink" class="textLink"
-				href="<c:url value="/async/deferred-result/exception" />">GET /async/deferred-result/exception</a>
-		</li>
-		<li>
-			<a id="deferredResultTimeoutValueLink" class="textLink"
-				href="<c:url value="/async/deferred-result/timeout-value" />">GET /async/deferred-result/timeout-value</a>
-		</li>
-		</ul>
-	</div>
+    
+<!-- header section starts  -->
+
+<header>
+
+    <div id="menu-bar" class="fas fa-bars"></div>
+
+    <a href="#" class="logo"><span>A</span>mazing Viet Nam</a>
+
+    <nav class="navbar">
+        <a href="#home">Trang Chủ</a>
+        <a href="#book">Chuyến Đi</a>
+        <a href="#packages">Tour Du Lịch</a>
+        <a href="#services">Tiện Ích Dịch Vụ</a>
+        <a href="#gallery">Bài Viết</a>
+        <a href="#review">Đánh Giá</a>
+        
+    </nav>
+
+    <div class="icons">
+        <i class="fas fa-search" id="search-btn"></i>
+        <i class="fas fa-user" id="login-btn"></i>
+    </div>
+
+    <form action="" class="search-bar-container">
+        <input type="search" id="search-bar" placeholder="Nhập điều bạn muốn tìm..." onkeyup="searchfunc()">
+        <label for="search-bar" class="fas fa-search"></label>
+    </form>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- login form container  -->
+
+<div class="login-form-container">
+
+    <i class="fas fa-times" id="form-close"></i>
+
+    <form action="">
+        <h3>Login</h3>
+            <input type="account" class="box" placeholder="Nhập email của bạn">
+            <input type="password" class="box" placeholder="Nhập mật khẩu">
+            <input type="submit" value="Đăng Nhập" class="btn">
+            <input type="checkbox" id="remember">
+            <label for="remember">Nhớ tài khoản</label>
+            <p>Quên mật khẩu ? <a href="#">Click vào đây</a></p>
+            <p>Đăng ký tài khoản ? <a href="#">Đăng ký ngay</a></p>
+    </form>
+
 </div>
-<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/jqueryform/2.8/jquery.form.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/jqueryui/1.8/jquery.ui.core.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/jqueryui/1.8/jquery.ui.widget.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/jqueryui/1.8/jquery.ui.tabs.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/json2.js" />"></script>
-<script>
-	MvcUtil = {};
-	MvcUtil.showSuccessResponse = function (text, element) {
-		MvcUtil.showResponse("success", text, element);
-	};
-	MvcUtil.showErrorResponse = function showErrorResponse(text, element) {
-		MvcUtil.showResponse("error", text, element);
-	};
-	MvcUtil.showResponse = function(type, text, element) {
-		var responseElementId = element.attr("id") + "Response";
-		var responseElement = $("#" + responseElementId);
-		if (responseElement.length == 0) {
-			responseElement = $('<span id="' + responseElementId + '" class="' + type + '" style="display:none">' + text + '</span>').insertAfter(element);
-		} else {
-			responseElement.replaceWith('<span id="' + responseElementId + '" class="' + type + '" style="display:none">' + text + '</span>');
-			responseElement = $("#" + responseElementId);
-		}
-		responseElement.fadeIn("slow");
-	};
-	MvcUtil.xmlencode = function(xml) {
-		//for IE 
-		var text;
-		if (window.ActiveXObject) {
-		    text = xml.xml;
-		 }
-		// for Mozilla, Firefox, Opera, etc.
-		else {
-		   text = (new XMLSerializer()).serializeToString(xml);
-		}			
-		    return text.replace(/\&/g,'&'+'amp;').replace(/</g,'&'+'lt;')
-	        .replace(/>/g,'&'+'gt;').replace(/\'/g,'&'+'apos;').replace(/\"/g,'&'+'quot;');
-	};
-</script>	
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#tabs").tabs();
 
-	// Append '#' to the window location so "Back" returns to the selected tab
-	// after a redirect or a full page refresh (e.g. Views tab).
+<!-- home section starts  -->
 
-	// However, note this general disclaimer about going back to previous tabs: 
-	// https://docs.jquery.com/UI/API/1.8/Tabs#Back_button_and_bookmarking
+<section class="home" id="home">
 
-	$("#tabs").bind("tabsselect", function(event, ui) { window.location.hash = ui.tab.hash; });
+    <div class="content">
+        <h3>Amazing Việt Nam</h3>
+        <p>Cũng Khám Phá Đất Nước Việt Nam Xinh Đẹp</p>
+        
+    </div>
+
+    <div class="video-container">
+        <video src="resources/video/Hoi_An.mp4" id="video-slider" loop autoplay muted ></video>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- book section starts  -->
+
+<section class="book" id="book">
+
+    <h1 class="heading">
+        <span>C</span>
+        <span>h</span>
+        <span>u</span>
+        <span>y</span>
+        <span>ế</span>
+        <span>n</span>
+        <span class="space"></span>
+        <span>Đ</span>
+        <span>i</span>
+       
+        
+    </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="resources/img/anh_1.jpg">
+        </div>
+    
+        <form action="">
+            <div class="inputBox">
+                <h3>Nơi đến</h3>
+                <input type="text" placeholder="Nhập địa điểm muốn đi">
+            </div>
+            <div class="inputBox">
+                <h3>Số người</h3>
+                <input type="number" placeholder="Chọn số người chuyến đi">
+            </div>
+            <div class="inputBox">
+                <h3>Ngày đi</h3>
+                <input type="date">
+            </div>
+            <div class="inputBox">
+                <h3>Ngày về</h3>
+                <input type="date">
+            </div>
+            <input type="submit" class="btn" value="Tìm Kiếm">
+        </form>
+
+    </div>
+
+</section>
+
+<!-- book section ends -->
+
+<!-- packages section starts  -->
+
+<section class="packages" id="packages">
+
+    <h1 class="heading">
+        <span>T</span>
+        <span>o</span>
+        <span>u</span>
+        <span>r</span>
+        <span class="space"></span>
+        <span>D</span>
+        <span>u</span>
+        <span class="space"></span>
+        <span>L</span>
+        <span>ị</span>
+        <span>c</span>
+        <span>h</span>
+    </h1>
+    
+    <div class="box-container">
+
+        <div class="box">
+            <img src="resources/img/11.jpg" >
+            <div class="content">
+                <h3> <i class="fas fa-map-marker-alt"></i> Hội An </h3>
+                <p>kHÁM PHÁ HỘI AN KIẾN TRÚC CỔ XƯA VÀ ẨM THỰC ĐỘC ĐÁO MIỀN TRUNG</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    
+                </div>
+                <div class="price"> 3.400.000 VNĐ - <span>5.500.000 VNĐ</span> </div>
+                <a href="#" class="btn">Đặt ngay</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="resources/img/phu_quoc.jpg" >
+            <div class="content">
+                <h3> <i class="fas fa-map-marker-alt"></i> Phú Quốc </h3>
+                <p>Khám Phá Phú Quốc Hòn Đảo Xinh Đẹp Của Việt Nam</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price"> 4.500.000 VNĐ - <span>7.500.000 VNĐ</span> </div>
+                <a href="#" class="btn">Đặt ngay</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="resources/img/da_lat.jfif" >
+            <div class="content">
+                <h3> <i class="fas fa-map-marker-alt"></i> Đà Lạt </h3>
+                <p>Đến Với Đà Lạt Thành Phố Thơ Mộng Với Những Câu Chuyện Ma</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price"> 3.000.000 VNĐ - <span>5.000.000 VNĐ</span> </div>
+                <a href="#" class="btn">Đặt ngay</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="resources/img/nha_trang.jpg" >
+            <div class="content">
+                <h3> <i class="fas fa-map-marker-alt"></i> Nha Trang </h3>
+                <p>Khám Phá Đảo Nhiệt Tới Tại Miền Trung</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price"> 3.800.000 VNĐ - <span>6.200.000 VNĐ</span> </div>
+                <a href="#" class="btn">Đặt ngay</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="resources/img/vung_tau.jpg" >
+            <div class="content">
+                <h3> <i class="fas fa-map-marker-alt"></i> Vũng Tàu </h3>
+                <p> Tận Hưởng Chuyển Du Lịch Biển Tuyệt Vời Tại Vũng Tàu</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price"> 2.800.000 VNĐ - <span>4.200.000 VNĐ</span> </div>
+                <a href="#" class="btn">Đặt ngay</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/da nang.jpg" >
+            <div class="content">
+                <h3> <i class="fas fa-map-marker-alt"></i> Đà Nẵng </h3>
+                <p> Vivu Thành Phố Đáng Sống Nhất Việt Nam </p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price"> 5.800.000 VNĐ - <span>7.200.000 VNĐ</span> </div>
+                <a href="#" class="btn">Đặt ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- packages section ends -->
+
+<!-- services section starts  -->
+
+<section class="services" id="services">
+
+    <h1 class="heading">
+        <span>T</span>
+        <span>i</span>
+        <span>ệ</span>
+        <span>n</span>
+        <span class="space"></span>
+        <span>í</span>
+        <span>c</span>
+        <span>h</span>
+        <span class="space"></span>
+        <span>D</span>
+        <span>ị</span>
+        <span>c</span>
+        <span>h</span>
+        <span class="space"></span>
+        <span>V</span>
+        <span>ụ</span>
+        
+    </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <i class="fas fa-hotel"></i>
+            <h3>Khách Sạn</h3>
+            <p>Amazing Việt Nam nơi cung cấp cho bạn dịch vụ nghĩ dưỡng chất lượng nơi cao mọi sự yêu thương sẽ được gửi gắm thay bạn</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-utensils"></i>
+            <h3>Ẩm Thực Và Thức Uống</h3>
+            <p>Amazing Việt Nam cung cấp cho bạn nền ẩm thực đậm đà bản sắc dân tộc Việt Nam</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-bullhorn"></i>
+            <h3>Hướng Dẫn Du Lịch An Toàn</h3>
+            <p>Amazing Việt Nam cam kết khử khuẩn mọi trang thiết bị công cộng đảm bảo phòng chống dịch Covid-19 và thực hiện đầy đủ khuyến cáo của bộ y tế</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-globe-asia"></i>
+            <h3>Cùng Amazing Việt Nam Vươn Cao Ra Thế Giới </h3>
+            <p>Mang sứ mệnh cả dân tộc Amazing Việt Nam mong muốn phát triển du lịch Việt Nam ra khắp thế giới</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-plane"></i>
+            <h3>Không Chỉ Là Chuyến Đi</h3>
+            <p>Amazing Việt Nam Thấu hiểu sự vất vả của bạn trong công việc nên được phục vụ trong những chuyến du lịch là sự vui mừng của chúng tối</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-hiking"></i>
+            <h3>Đồng Hành Bạn Trên Mọi Chuyến Đi</h3>
+            <p> Chúng tôi sẽ không ngừng mang đến những trải nghiệm tuyệt vợi trên những đánh giá của bạn </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- services section ends -->
+
+<!-- gallery section starts  -->
+
+<section class="gallery" id="gallery">
+
+    <h1 class="heading">
+        <span>B</span>
+        <span>à</span>
+        <span>i</span>
+        <span class="space"></span>
+        <span>V</span>
+        <span>i</span>
+        <span>ế</span>
+        <span>t</span>
+        <span class="space"></span>
+        <span>N</span>
+        <span>ổ</span>
+        <span>i</span>
+        <span class="space"></span>
+        <span>B</span>
+        <span>ậ</span>
+        <span>t</span>
+        
+
+    </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="img/thay loc.jpeg">
+            <div class="content">
+                <h3>Thầy Lộc Fuho</h3>
+                <p>Cảm ơn Amazing Việt Nam đã giúp thầy có chuyến du lịch với học sinh rất tuyệt vời</p>
+                
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="resources/img/thuan huan.jpg" >
+            <div class="content">
+                <h3>Thấy Huấn GDCD</h3>
+                <p>Xã hội này hông làm đòi đi du lịch thì chỉ có đi trên Amazing Việt Nam thế cho nó dễ nhá</p>
+               
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/thong soi ca.jpg">
+            <div class="content">
+                <h3>Thông Sói Ca</h3>
+                <p>Nếu em thích lãng mạng hội Châu Âu thì em hãy đến với anh còn không hãy đến với Amazing Việt Nam</p>
+                
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/ceo phuong hang.jpg">
+            <div class="content">
+                <h3>CEO Phương Hằng</h3>
+                <p>Tôi có Đại Nam nhưng tôi vân phải loay hoay tìm chỗ du lịch nhờ có Amazing Việt Nam giúp tôi đi chơi thoải mái hơn</p>
+                
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/ong quyet.jpeg">
+            <div class="content">
+                <h3>Chủ Tịch Quyết FLC</h3>
+                <p>Đi thật xa để trở về về đâu thì đã có Amazing Việt Nam Lo cảm ơn vì tất cả </p>
+               
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/kha banh.webp">
+            <div class="content">
+                <h3>Doanh Nhân Khá Bảnh</h3>
+                <p>Vậy đã mấy năm trôi qua nhờ có Amazing Việt Nam mà tôi có chuyên đi thật xa để trở về</p>
+                
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/domixi.webp" >
+            <div class="content">
+                <h3>Độ MiXi </h3>
+                <p>Hí Anh Em lâu quá chưa đi du lịch cảm ơn Amazing Việt Nam giúp tôi đi Đà Lạt rất vui </p>
+                
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="img/thay tien day hoa.jpg">
+            <div class="content">
+                <h3>Thầy Tiến Dạy Hóa</h3>
+                <p>Nhặt được của rơi chắn chắn còn cái nịt nhưng đi du lịch chắc chắn được Amazing Việt Nam lo</p>
+               
+            </div>
+        </div>
+
+</section>
+
+<!-- gallery section ends -->
+
+<!-- review section starts  -->
 
 
-	$("a.textLink").click(function(){
-		var link = $(this);
-		$.ajax({ url: link.attr("href"), dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, link); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, link); }});
-		return false;
-	});
 
-	$("a.utf8TextLink").click(function(){
-		var link = $(this);
-		$.ajax({ url: link.attr("href"), dataType: "text", beforeSend: function(req) { req.setRequestHeader("Accept", "text/plain;charset=UTF-8"); }, success: function(text) { MvcUtil.showSuccessResponse(text, link); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, link); }});
-		return false;
-	});
+<!-- Hết đánh giá review -->
+<!-- review section starts  -->
 
-	$("form.textForm").submit(function(event) {
-		var form = $(this);
-		var button = form.children(":first");
-		$.ajax({ type: "POST", url: form.attr("action"), data: "foo", contentType: "text/plain", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
-		return false;
-	});
+<section class="review" id="review">
 
-	$("#readForm").submit(function() {
-		var form = $(this);
-		var button = form.children(":first");
-		$.ajax({ type: "POST", url: form.attr("action"), data: "foo=bar&fruit=apple", contentType: "application/x-www-form-urlencoded", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
-		return false;
-	});
+    <h1 class="heading">
+        <span>B</span>
+        <span>à</span>
+        <span>i</span>
+        <span class="space"></span>
+        <span>V</span>
+        <span>i</span>
+        <span>ế</span>
+        <span>t</span>
+        <span class="space"></span>
+        <span>Đ</span>
+        <span>á</span>
+        <span>n</span>
+        <span>h</span>
+        <span class="space"></span>
+        <span>G</span>
+        <span>i</span>
+        <span>á</span>
+    </h1>
 
-	$("#writeForm").click(function() {
-		var link = $(this);
-		$.ajax({ url: this.href, dataType: "text", beforeSend: function(req) { req.setRequestHeader("Accept", "application/x-www-form-urlencoded"); }, success: function(form) { MvcUtil.showSuccessResponse(form, link); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, link); }});					
-		return false;
-	});
+    <div class="swiper-container review-slider">
 
-	$("form.readXmlForm").submit(function() {
-		var form = $(this);
-		var button = form.children(":first");
-		$.ajax({ type: "POST", url: form.attr("action"), data: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><javaBean><foo>bar</foo><fruit>apple</fruit></javaBean>", contentType: "application/xml", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
-		return false;
-	});
+        <div class="swiper-wrapper">
 
-	$("a.writeXmlLink").click(function() {
-		var link = $(this);
-		$.ajax({ url: link.attr("href"),
-			beforeSend: function(req) { 
-				if (!this.url.match(/\.xml$/)) {
-					req.setRequestHeader("Accept", "application/xml");
-				}
-			},
-			success: function(xml) {
-				MvcUtil.showSuccessResponse(MvcUtil.xmlencode(xml), link);
-			},
-			error: function(xhr) { 
-				MvcUtil.showErrorResponse(xhr.responseText, link);
-			}
-		});
-		return false;
-	});					
+            <div class="swiper-slide">
+                <div class="box">
+                    <img src="img/son tung.webp">
+                    <h3>Anh Tùng </h3>
+                    <p>Lần đầu tiên tôi đi du lịch thật sự rất khó khăn vì rất nhiều thứ mới mẻ nhờ có Amazing Việt Nam đã giúp tôi có chuyến đi thú vị </p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <img src="img/hue.jfif" >
+                    <h3>Thùy Trâm</h3>
+                    <p>Tôi rất thích đi du lịch nhưng không biết đi đâu nhờ có Amazing Việt Nam đã giúp tôi có chuyến du lịch huế tuyêt vời</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <img src="img/thuan.jpg">
+                    <h3>Anh Thuận Coder</h3>
+                    <p>Từ nhỏ tôi không biết du lịch nhưng từ khi được biết Amazing Việt Nam đã có những chuyến đi rất vui</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <img src="img/anh lý.jpg">
+                    <h3>Anh Lý Fix Bug<h3>
+                    <p>Từ ngày ra trường chưa khi nào được đi du lịch nhờ có Amazing mà tui biết nhiều nơi để đi hơn</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
 
-	$("form.readJsonForm").submit(function() {
-		var form = $(this);
-		var button = form.children(":first");
-		var data = form.hasClass("invalid") ?
-				"{ \"foo\": \"bar\" }" : 
-				"{ \"foo\": \"bar\", \"fruit\": \"apple\" }";
-		$.ajax({ type: "POST", url: form.attr("action"), data: data, contentType: "application/json", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
-		return false;
-	});
+        </div>
 
-	$("a.writeJsonLink").click(function() {
-		var link = $(this);
-		$.ajax({ url: this.href,
-			beforeSend: function(req) {
-				if (!this.url.match(/\.json$/)) {
-					req.setRequestHeader("Accept", "application/json");
-				}
-			},
-			success: function(json) {
-				MvcUtil.showSuccessResponse(JSON.stringify(json), link);
-			},
-			error: function(xhr) {
-				MvcUtil.showErrorResponse(xhr.responseText, link);
-			}});
-		return false;
-	});
+    </div>
 
-	$("#readAtom").submit(function() {
-		var form = $(this);
-		var button = form.children(":first");
-		$.ajax({ type: "POST", url: form.attr("action"), data: '<?xml version="1.0" encoding="UTF-8"?> <feed xmlns="http://www.w3.org/2005/Atom"><title>My Atom feed</title></feed>', contentType: "application/atom+xml", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
-		return false;
-	});
+</section>
 
-	$("#writeAtom").click(function() {
-		var link = $(this);
-		$.ajax({ url: link.attr("href"),
-			beforeSend: function(req) { 
-				req.setRequestHeader("Accept", "application/atom+xml");
-			},
-			success: function(feed) {
-				MvcUtil.showSuccessResponse(MvcUtil.xmlencode(feed), link);
-			},
-			error: function(xhr) { 
-				MvcUtil.showErrorResponse(xhr.responseText, link);
-			}
-		});
-		return false;
-	});
-	
-	$("#readRss").submit(function() {
-		var form = $(this);
-		var button = form.children(":first");
-		$.ajax({ type: "POST", url: form.attr("action"), data: '<?xml version="1.0" encoding="UTF-8"?> <rss version="2.0"><channel><title>My RSS feed</title></channel></rss>', contentType: "application/rss+xml", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
-		return false;
-	});
+<!-- review section ends -->
 
-	$("#writeRss").click(function() {
-		var link = $(this);	
-		$.ajax({ url: link.attr("href"),
-			beforeSend: function(req) { 
-				req.setRequestHeader("Accept", "application/rss+xml");
-			},
-			success: function(feed) {
-				MvcUtil.showSuccessResponse(MvcUtil.xmlencode(feed), link);
-			},
-			error: function(xhr) { 
-				MvcUtil.showErrorResponse(xhr.responseText, link);
-			}
-		});
-		return false;
-	});
+<!-- footer section  -->
 
-	$("#byHeader").click(function(){
-		var link = $(this);
-		$.ajax({ url: this.href, dataType: "text", beforeSend: function(req) { req.setRequestHeader("FooHeader", "foo"); }, success: function(form) { MvcUtil.showSuccessResponse(form, link); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, link); }});
-		return false;
-	});
+<section class="footer">
 
-	// Include CSRF token as header in JQuery AJAX requests
-	// See https://docs.spring.io/spring-security/site/docs/3.2.x/reference/htmlsingle/#csrf-include-csrf-token-ajax
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(header, token);
-	});
+    <div class="box-container">
 
-});
-</script>
+        <div class="box">
+            <h3>Về Chúng Tôi</h3>
+            <p>Amazing Việt Nam là đơn vị hàng đầu việt nam giúp người Việt tìm kiếm những địa điểm du lịch lý tưởng trong đất nước hình chủ S.</p>
+        </div>
+        
+        <div class="box">
+            <h3>Theo dõi chúng tôi</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+            <a href="#">Linkedin</a>
+        </div>
+
+    </div>
+
+    <h1 class="credit"> Thiết Kế Bởi <span> Mr.Lê Văn Lĩnh </span> | Và Cộng Sự Phan Minh Thuận </h1>
+
+</section>
+
+
+
+
+
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
 </body>
 </html>
