@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="resources/style.css">
+    <link rel="stylesheet" href="resources/css/style.css">
 
 </head>
 <body>
@@ -361,7 +361,7 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="img/thay loc.jpeg">
+            <img src="resources/img/thay_loc.jpeg">
             <div class="content">
                 <h3>Thầy Lộc Fuho</h3>
                 <p>Cảm ơn Amazing Việt Nam đã giúp thầy có chuyến du lịch với học sinh rất tuyệt vời</p>
@@ -379,7 +379,7 @@
         </div>
 
         <div class="box">
-            <img src="img/thong soi ca.jpg">
+            <img src="resources/img/thong_soi_ca.jpg">
             <div class="content">
                 <h3>Thông Sói Ca</h3>
                 <p>Nếu em thích lãng mạng hội Châu Âu thì em hãy đến với anh còn không hãy đến với Amazing Việt Nam</p>
@@ -388,7 +388,7 @@
         </div>
 
         <div class="box">
-            <img src="img/ceo phuong hang.jpg">
+            <img src="resources/img/ceo_phuong_hang.jpg">
             <div class="content">
                 <h3>CEO Phương Hằng</h3>
                 <p>Tôi có Đại Nam nhưng tôi vân phải loay hoay tìm chỗ du lịch nhờ có Amazing Việt Nam giúp tôi đi chơi thoải mái hơn</p>
@@ -397,7 +397,7 @@
         </div>
 
         <div class="box">
-            <img src="img/ong quyet.jpeg">
+            <img src="resources/img/ong_quyet.jpeg">
             <div class="content">
                 <h3>Chủ Tịch Quyết FLC</h3>
                 <p>Đi thật xa để trở về về đâu thì đã có Amazing Việt Nam Lo cảm ơn vì tất cả </p>
@@ -406,7 +406,7 @@
         </div>
 
         <div class="box">
-            <img src="img/kha banh.webp">
+            <img src="resources/img/kha_banh.webp">
             <div class="content">
                 <h3>Doanh Nhân Khá Bảnh</h3>
                 <p>Vậy đã mấy năm trôi qua nhờ có Amazing Việt Nam mà tôi có chuyên đi thật xa để trở về</p>
@@ -415,7 +415,7 @@
         </div>
 
         <div class="box">
-            <img src="img/domixi.webp" >
+            <img src="resources/img/domixi.webp" >
             <div class="content">
                 <h3>Độ MiXi </h3>
                 <p>Hí Anh Em lâu quá chưa đi du lịch cảm ơn Amazing Việt Nam giúp tôi đi Đà Lạt rất vui </p>
@@ -424,7 +424,7 @@
         </div>
 
         <div class="box">
-            <img src="img/thay tien day hoa.jpg">
+            <img src="resources/img/thay_tien_day_hoa.jpg">
             <div class="content">
                 <h3>Thầy Tiến Dạy Hóa</h3>
                 <p>Nhặt được của rơi chắn chắn còn cái nịt nhưng đi du lịch chắc chắn được Amazing Việt Nam lo</p>
@@ -471,7 +471,7 @@
 
             <div class="swiper-slide">
                 <div class="box">
-                    <img src="img/son tung.webp">
+                    <img src="resources/img/son_tung.webp">
                     <h3>Anh Tùng </h3>
                     <p>Lần đầu tiên tôi đi du lịch thật sự rất khó khăn vì rất nhiều thứ mới mẻ nhờ có Amazing Việt Nam đã giúp tôi có chuyến đi thú vị </p>
                     <div class="stars">
@@ -485,7 +485,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="box">
-                    <img src="img/hue.jfif" >
+                    <img src="resources/img/hue.jfif" >
                     <h3>Thùy Trâm</h3>
                     <p>Tôi rất thích đi du lịch nhưng không biết đi đâu nhờ có Amazing Việt Nam đã giúp tôi có chuyến du lịch huế tuyêt vời</p>
                     <div class="stars">
@@ -499,7 +499,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="box">
-                    <img src="img/thuan.jpg">
+                    <img src="resources/img/thuan.jpg">
                     <h3>Anh Thuận Coder</h3>
                     <p>Từ nhỏ tôi không biết du lịch nhưng từ khi được biết Amazing Việt Nam đã có những chuyến đi rất vui</p>
                     <div class="stars">
@@ -513,7 +513,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="box">
-                    <img src="img/anh lý.jpg">
+                    <img src="resources/img/anh_ly.jpg">
                     <h3>Anh Lý Fix Bug<h3>
                     <p>Từ ngày ra trường chưa khi nào được đi du lịch nhờ có Amazing mà tui biết nhiều nơi để đi hơn</p>
                     <div class="stars">
@@ -568,7 +568,7 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
+<script src="resources/js/script.js"></script>
 
 </body>
 </html>
