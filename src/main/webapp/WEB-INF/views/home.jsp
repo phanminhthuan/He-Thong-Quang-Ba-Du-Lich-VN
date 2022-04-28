@@ -244,7 +244,7 @@
         </div>
 
         <div class="box">
-            <img src="img/da nang.jpg" >
+            <img src="resources/img/da_nang.jpg" >
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> Đà Nẵng </h3>
                 <p> Vivu Thành Phố Đáng Sống Nhất Việt Nam </p>
